@@ -1,0 +1,31 @@
+def gcd(arr):
+    mini = min(arr)
+    while mini:
+        for i in arr:
+            if i % mini != 0:
+                mini -= 1
+                break
+        else:
+            return mini
+    
+
+def finder(n,arr):
+    totalCost = 0
+    ind = n
+    while gcd(arr) != 1:
+        checklist = arr[:ind-1]+ [ind] + arr[ind:]
+        newGCD = gcd(checklist)
+        if newGCD == 1:
+            totalCost += n - ind + 1
+            break
+        if newGCD == ind:
+            totalCost += n - ind + 1
+            arr = checklist
+
+        ind -= 1
+        totalCost = 0
+
+    return totalCost
+
+
+print(finder(int(input()),list(map(int,input().split()))))
