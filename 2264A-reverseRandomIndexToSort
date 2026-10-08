@@ -1,0 +1,42 @@
+import sys
+
+def issorted(n,lis):
+  for i in range(1,n):
+    if lis[i] < lis[i-1]:
+      return False
+  return True
+
+
+def solve():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+      
+    iterator = iter(input_data)
+    t = int(next(iterator))
+
+    for _ in range(t):
+        n = int(next(iterator))
+        p = [int(next(iterator)) for _ in range(n)]
+
+        r = n-1
+      
+        for l in range(0,n-1):
+          if p[l] < p[l+1]:
+            while p[r] > p[r-1]:
+              r -= 1
+              if r == 0:
+                sys.stdout.write("NO\n")
+                break
+            else:
+              p[l],p[r] = p[r],p[l]
+              
+        if issorted(n,p):
+            sys.stdout.write("YES\n")
+        else:
+            sys.stdout.write("NO\n")
+
+
+
+if __name__ == "__main__":
+    solve()
